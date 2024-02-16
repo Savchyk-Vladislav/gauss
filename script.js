@@ -28,6 +28,40 @@ function gaussMethod(matrix) {
     return res;
 }
 
-let matrix = [[2, 7, 3, 980], [3, 4, 5, 780], [5, 6, 1, 860]];
-let res = gaussMethod(matrix);
-console.log(res);
+document.querySelector('.countTheResults').addEventListener('click', function() {
+    let matrix = [];
+    let rows = document.querySelectorAll('.rowInp');
+    for (let i = 0; i < rows.length; i++) {
+        let inputs = rows[i].querySelectorAll('.squareInp');
+        let result = rows[i].querySelector('.result');
+        let row = [];
+        for (let j = 0; j < inputs.length; j++) {
+            row.push(parseFloat(inputs[j].value));
+        }
+        row.push(parseFloat(result.value));
+        matrix.push(row);
+    }
+    
+    let res = gaussMethod(matrix);
+    
+    let resultDiv = document.createElement('div');
+    resultDiv.textContent = 'Результат: ' + res.join(', ');
+    document.body.appendChild(resultDiv);
+});
+
+document.querySelector('.installGaussTask').addEventListener('click', function() {
+    let values = [
+        [2, 7, 3, 980],
+        [3, 4, 5, 780],
+        [5, 6, 1, 860]
+    ];
+    let rows = document.querySelectorAll('.rowInp');
+    for (let i = 0; i < rows.length; i++) {
+        let inputs = rows[i].querySelectorAll('.squareInp');
+        let result = rows[i].querySelector('.result');
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].value = values[i][j];
+        }
+        result.value = values[i][values[i].length - 1];
+    }
+});
